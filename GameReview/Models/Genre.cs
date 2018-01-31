@@ -1,0 +1,14 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace GameReview.Models
+{
+    public class Genre
+    {
+        public int ID { get; set; }
+        public string Type { get; set; }
+        public IList<Game> Games { get; set; }
+    }
+}

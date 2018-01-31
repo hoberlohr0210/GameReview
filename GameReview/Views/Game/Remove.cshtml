@@ -1,0 +1,13 @@
+﻿<h1>ViewBag.title</h1>
+
+<form method="post">
+    @foreach (var game in ViewBag.games)
+    {
+        <input type="checkbox" name="genreIds" id="@game.ID" value="@game.ID" />
+        <label for="@game.ID">@game.Title</label>
+        <br />
+    }
+
+    <input type="submit" value="Remove Selected Game(s)" />
+</form>
+

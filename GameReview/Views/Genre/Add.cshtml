@@ -1,0 +1,17 @@
+﻿@model GameReview.ViewModels.AddGenreViewModel
+
+    @{ 
+        ViewData["Title"] = "Add";
+    }
+
+<h2>Add</h2>
+
+<form a asp-controller="Category" asp-action="Add" method="post">
+
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" />
+        <span asp-validation-for="Name"></span>
+    </div>
+
+</form>

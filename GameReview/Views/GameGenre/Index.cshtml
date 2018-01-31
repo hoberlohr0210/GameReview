@@ -1,0 +1,17 @@
+﻿@model IEnumerable<GameReview.Models.Genre>
+
+    <h2>Genres</h2>
+
+<ul>
+    @foreach (var genre in Model)
+    {
+        <li>
+            <a asp-controller="Genre"
+               asp-action="ViewGameGenre"
+               asp-route-id="@genre.ID">@genre.Type</a>
+        </li>
+
+    }
+</ul>
+
+<p><a asp-controller="Genre" asp-action="Add">Add Genre</a></p>
