@@ -5,11 +5,10 @@ using System.Threading.Tasks;
 
 namespace GameReview.Models
 {
-    public class Genre
+    public class GameType
     {
         public int ID { get; set; }
-        public string Name { get; set; }
-
-        public IList<GameGenre> GameGenres { get; set; }
+        public string Type { get; set; }
+        public IList<Game> Games { get; set; }
     }
 }

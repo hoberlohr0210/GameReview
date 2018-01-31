@@ -9,6 +9,7 @@ namespace GameReview.Data
         //part of Entity Framework
         //it's a property
         public DbSet<Game> Games { get; set; }
+        public DbSet<GameType> Types { get; set; }
         public DbSet<Genre> Genres { get; set; }
         public DbSet<GameGenre> GameGenres { get; set; }
 

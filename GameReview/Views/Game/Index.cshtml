@@ -1,8 +1,9 @@
 ﻿@model IList<GameReview.Models.Game>
 
-    <h1>@ViewBag.Genre</h1>
+<h1>@ViewBag.Genre</h1>
 
 <table class="table">
+
     <tr>
         <th>Title</th>
         <th>Description</th>
@@ -14,9 +15,8 @@
         <tr>
             <td>@game.Title</td>
             <td>@game.Description</td>
-            <td>@game.Genre.Name</td>
+            <td>@game.Type</td>
         </tr>
-
     }
 </table>
 
@@ -25,9 +25,12 @@
     <p>No games yet!</p>
 }
 
-    <p><a asp-controller="Game" asp-action="Add">Add</a>
-    <a>|</a>    
-    <a asp-controller="Game" asp-action="Remove">Remove</a></p>
+
+<p>
+    <a asp-controller="Game" asp-action="Add">Add</a>
+    <a>|</a>
+    <a asp-controller="Game" asp-action="Remove">Remove</a>
+</p>
 
 <br />
 <br />

@@ -6,9 +6,9 @@ namespace GameReview.Models
     {
         public string Title { get; set; }
         public string Description { get; set; }
-        public GameGenre Genre { get; set; }
+        public GameType Type { get; set; }
         public int ID { get; set; }
-        public int GenreID { get; set; }
+        public int TypeID { get; set; }
 
         public IList<GameGenre> GameGenres { get; set; }
     }

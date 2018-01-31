@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using GameReview.Data;
 using GameReview.Models;
 using GameReview.ViewModels;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc;
+using System;
+using GameReview.Data;
 
-// For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace GameReview.Controllers
 {
@@ -17,13 +16,13 @@ namespace GameReview.Controllers
 
         public GenreController(GameDbContext dbContext)
         {
-            context = dbContext;
+            this.context = dbContext;
         }
-        // GET: /<controller>/
+
         public IActionResult Index()
         {
-            var gameGenre = context.Genres.ToList();
-            return View(gameGenre);
+            List<Genre> genres = context.Genres.ToList();
+            return View();
         }
 
         public IActionResult Add()
@@ -35,11 +34,11 @@ namespace GameReview.Controllers
         [HttpPost]
         public IActionResult Add(AddGenreViewModel addGenreViewModel)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                GameGenre newGenre = new GameGenre
+                Genre newGenre = new Genre
                 {
-                    Type = addGenreViewModel.Name
+                    Name = addGenreViewModel.Name
                 };
 
                 context.Genres.Add(newGenre);
@@ -50,5 +49,65 @@ namespace GameReview.Controllers
 
             return View(addGenreViewModel);
         }
+
+        public IActionResult ViewGenre(int id)
+        {
+            List<GameGenre> items = context
+                .GameGenres
+                .Include(item => item.Game)
+                .Where(g => g.GenreID == id)
+                .ToList();
+
+            Genre genre = context.Genres.FirstOrDefault(g => g.ID == id);
+
+            ViewGenreViewModel viewModel = new ViewGenreViewModel
+            {
+                Genre = genre,
+                Items = items
+            };
+
+            return View(viewModel);
+        }
+
+        public IActionResult AddGame(int id)
+        {
+            //retrieve the menu wit the given ID via context
+            //list of all cheeses in the system
+            Genre genre = context.Genres.Single(g => g.ID == id);
+            List<Game> games = context.Games.ToList();
+            return View(new AddGameItemViewModel(genre, games));
+        }
+
+        [HttpPost]
+        public IActionResult AddGame(AddGameItemViewModel addGameItemViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var gameID = addGameItemViewModel.GameID;
+                var genreID = addGameItemViewModel.GenreID;
+
+                IList<GameGenre> existingItems = context.GameGenres
+                    .Where(gg => gg.GameID == gameID)
+                    .Where(gg => gg.GenreID == genreID).ToList();
+
+                if (existingItems.Count == 0)
+                {
+                    GameGenre gameItem = new GameGenre
+                    {
+                        //these are the values in the View Model
+                        Game = context.Games.Single(g => g.ID == gameID),
+                        Genre = context.Genres.Single(g => g.ID == genreID)
+                    };
+
+                    context.GameGenres.Add(gameItem);
+                    context.SaveChanges();
+                }
+
+                return Redirect(string.Format("/Menu/ViewMenu/" + addGameItemViewModel.GenreID));
+
+            }
+            return View(addGameItemViewModel);
+        }
+
     }
 }

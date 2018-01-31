@@ -22,7 +22,7 @@ namespace GameReview.Controllers
         public IActionResult Index()
         {
 
-        IList<Game> games = context.Games.Include(g => g.Genre).ToList();
+        IList<Game> games = context.Games.Include(g => g.Type).ToList();
 
             return View(games);
         }
@@ -31,7 +31,7 @@ namespace GameReview.Controllers
         {
             //passes collection of all description objects to the constructor
             //generates a select list hopefully
-            AddGameViewModel addGameViewModel = new AddGameViewModel(context.Genres.ToList());
+            AddGameViewModel addGameViewModel = new AddGameViewModel(context.Types.ToList());
             return View(addGameViewModel);
         }
 
@@ -40,13 +40,13 @@ namespace GameReview.Controllers
         {
             if (ModelState.IsValid)
             {
-                //GameGenre newGameGenre = context.Genres.Single(g => g.ID == addGameViewModel.GenreID);
+                GameType newGameType = context.Types.Single(g => g.ID == addGameViewModel.TypeID);
                 //add the new game to my existing games
                 Game newGame = new Game
                 {
                     Title = addGameViewModel.Title,
                     Description = addGameViewModel.Description,
-                    Genre = newGameGenre
+                    Type = newGameType
                 };
                 context.Games.Add(newGame);
                 context.SaveChanges();
@@ -77,24 +77,24 @@ namespace GameReview.Controllers
             return Redirect("/");
         }
 
-        public IActionResult Genre(int id)
+        public IActionResult Type(int id)
         {
             if (id ==0)
             {
-                return Redirect("/Genre");
+                return Redirect("/Type");
             }
 
             //will retrieve a specific genre that has its games list populated
             //that matches a given ID passed in by the administrative user
-            GameGenre theGenre = context.Genres
-                .Include(gen => gen.Games)
-                .Single(gen => gen.ID == id);
+            GameType theType = context.Types
+                .Include(ty => ty.Games)
+                .Single(ty => ty.ID == id);
 
-            ViewBag.title = "Games in genre: " + theGenre.Genre;
+            ViewBag.title = "Games in genre: " + theType.Type;
             //passes the list into the VIew
             //wouldn't have been populated if not included above
             //Games is a property we have already defined
-            return View("Index", theGenre.Game);
+            return View("Index", theType.Games);
         }
     
     }

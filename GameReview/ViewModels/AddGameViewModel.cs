@@ -19,20 +19,20 @@ namespace GameReview.ViewModels
 
         [Required]
         [Display(Name = "Category")]
-        public int GenreID { get; set; }
+        public int TypeID { get; set; }
 
-        public List<SelectListItem> Genres { get; set; }
+        public List<SelectListItem> Types { get; set; }
         public AddGameViewModel() { }
 
-        public AddGameViewModel(IEnumerable<GameGenre> genres)
+        public AddGameViewModel(IEnumerable<GameType> types)
         {
-            Genres = new List<SelectListItem>();
-            foreach (var genre in genres)
+            Types = new List<SelectListItem>();
+            foreach (var type in types)
             {
-                Genres.Add(new SelectListItem
+                Types.Add(new SelectListItem
                 {
-                    Value = (genre.ID).ToString(),
-                    Text = genre.Name
+                    Value = (type.ID).ToString(),
+                    Text = type.Type
                 });
             }
         }

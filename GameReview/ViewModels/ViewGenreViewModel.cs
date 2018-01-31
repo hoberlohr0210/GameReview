@@ -3,9 +3,9 @@ using GameReview.Models;
 
 namespace GameReview.ViewModels
 {
-    public class ViewGameGenreViewModel
+    public class ViewGenreViewModel
     {
-        public IList<GameGenre> Game { get; set; }
+        public IList<GameGenre> Items { get; set; }
         public Genre Genre { get; set; }
     }
 }
