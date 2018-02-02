@@ -11,7 +11,7 @@ using System;
 namespace GameReview.Migrations
 {
     [DbContext(typeof(GameDbContext))]
-    [Migration("20180131214047_InitialMigration")]
+    [Migration("20180202203005_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -57,7 +57,7 @@ namespace GameReview.Migrations
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Type");
+                    b.Property<string>("Name");
 
                     b.HasKey("ID");
 

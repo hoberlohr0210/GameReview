@@ -18,7 +18,7 @@ namespace GameReview.ViewModels
         public string Description { get; set; }
 
         [Required]
-        [Display(Name = "Category")]
+        [Display(Name = "Type")]
         public int TypeID { get; set; }
 
         public List<SelectListItem> Types { get; set; }
@@ -32,7 +32,7 @@ namespace GameReview.ViewModels
                 Types.Add(new SelectListItem
                 {
                     Value = (type.ID).ToString(),
-                    Text = type.Type
+                    Text = type.Name
                 });
             }
         }

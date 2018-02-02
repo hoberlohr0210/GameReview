@@ -28,18 +28,18 @@ namespace GameReview.Controllers
 
         public IActionResult Add()
         {
-            AddTypeViewModel addGenreViewModel = new AddTypeViewModel();
-            return View(addGenreViewModel);
+            AddTypeViewModel addTypeViewModel = new AddTypeViewModel();
+            return View(addTypeViewModel);
         }
 
         [HttpPost]
-        public IActionResult Add(AddTypeViewModel addGenreViewModel)
+        public IActionResult Add(AddTypeViewModel addTypeViewModel)
         {
             if(ModelState.IsValid)
             {
                 GameType newType = new GameType
                 {
-                    Type = addGenreViewModel.Type
+                    Name = addTypeViewModel.Name
                 };
 
                 context.Types.Add(newType);
@@ -48,7 +48,7 @@ namespace GameReview.Controllers
                 return Redirect("/Type");
             }
 
-            return View(addGenreViewModel);
+            return View(addTypeViewModel);
         }
     }
 }

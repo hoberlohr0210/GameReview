@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace GameReview.ViewModels
 {
-    public class AddGameItemViewModel
+    public class AddGenreItemViewModel
     {
         public int GameID { get; set; }
         public int GenreID { get; set; }
@@ -15,9 +15,9 @@ namespace GameReview.ViewModels
         public Genre Genre { get; set; }
         public List<SelectListItem> Games { get; set; }
 
-        public AddGameItemViewModel() { }
+        public AddGenreItemViewModel() { }
 
-        public AddGameItemViewModel(Genre genre, IEnumerable<Game> games)
+        public AddGenreItemViewModel(Genre genre, IEnumerable<Game> games)
         {
             Games = new List<SelectListItem>();
 

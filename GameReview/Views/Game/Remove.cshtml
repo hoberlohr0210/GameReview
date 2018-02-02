@@ -4,7 +4,7 @@
 
     @foreach (var game in ViewBag.games)
     {
-        <input type="checkbox" name="cheeseIds" id="@game.ID" value="@game.ID" />
+        <input type="checkbox" name="gameIds" id="@game.ID" value="@game.ID" />
         <label for="@game.ID">@game.Title</label>
         <br />
     }

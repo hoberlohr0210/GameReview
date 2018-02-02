@@ -1,0 +1,20 @@
+﻿@model GameReview.ViewModels.ViewGenreViewModel
+
+    @{ 
+        ViewBag.Title = Model.Genre.Name;
+    }
+
+<ul>
+    @foreach (var gameGenre in Model.Items)
+    {
+        <li>@gameGenre.Game.Title</li>
+
+    }
+</ul>
+
+@if (Model.Items.Count == 0)
+{
+    <p><i>No game genres yet</i></p>
+}
+
+<p><a asp-controller="Genre" asp-action="AddItem" asp-route-id="@Model.Genre.ID">Add Game</a></p>

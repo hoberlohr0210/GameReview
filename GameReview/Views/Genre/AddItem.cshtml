@@ -1,0 +1,16 @@
+﻿@model GameReview.ViewModels.AddGenreItemViewModel
+
+    @{ 
+        ViewBag.Title = "Add Game to Genre: " + Model.Genre.Name;
+    }
+
+<form a asp-controller="Genre" asp-action="AddItem" method="post">
+
+    <div class="form-group">
+        <label asp-for="GameID"></label>
+        <select asp-for="GameID" asp-items="Model.Games"></select>/>
+        <span asp-validation-for="GameID"></span>
+    </div>
+    <input type="hidden" name="GenreID" value="@Model.Genre.ID" />
+    <input type="submit" value="Add Item" />
+</form>

@@ -8,7 +8,7 @@ namespace GameReview.Models
     public class GameType
     {
         public int ID { get; set; }
-        public string Type { get; set; }
+        public string Name { get; set; }
         public IList<Game> Games { get; set; }
     }
 }

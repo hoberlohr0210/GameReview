@@ -31,8 +31,7 @@ namespace GameReview.Controllers
 
         public IActionResult Error()
         {
-            //will need to change this
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View();
         }
     }
 }

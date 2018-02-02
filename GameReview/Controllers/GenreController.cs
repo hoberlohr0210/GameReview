@@ -22,7 +22,7 @@ namespace GameReview.Controllers
         public IActionResult Index()
         {
             List<Genre> genres = context.Genres.ToList();
-            return View();
+            return View(genres);
         }
 
         public IActionResult Add()
@@ -69,22 +69,22 @@ namespace GameReview.Controllers
             return View(viewModel);
         }
 
-        public IActionResult AddGame(int id)
+        public IActionResult AddItem(int id)
         {
             //retrieve the menu wit the given ID via context
             //list of all cheeses in the system
             Genre genre = context.Genres.Single(g => g.ID == id);
             List<Game> games = context.Games.ToList();
-            return View(new AddGameItemViewModel(genre, games));
+            return View(new AddGenreItemViewModel(genre, games));
         }
 
         [HttpPost]
-        public IActionResult AddGame(AddGameItemViewModel addGameItemViewModel)
+        public IActionResult AddItem(AddGenreItemViewModel addGenreItemViewModel)
         {
             if (ModelState.IsValid)
             {
-                var gameID = addGameItemViewModel.GameID;
-                var genreID = addGameItemViewModel.GenreID;
+                var gameID = addGenreItemViewModel.GameID;
+                var genreID = addGenreItemViewModel.GenreID;
 
                 IList<GameGenre> existingItems = context.GameGenres
                     .Where(gg => gg.GameID == gameID)
@@ -92,21 +92,21 @@ namespace GameReview.Controllers
 
                 if (existingItems.Count == 0)
                 {
-                    GameGenre gameItem = new GameGenre
+                    GameGenre genreItem = new GameGenre
                     {
                         //these are the values in the View Model
                         Game = context.Games.Single(g => g.ID == gameID),
                         Genre = context.Genres.Single(g => g.ID == genreID)
                     };
 
-                    context.GameGenres.Add(gameItem);
+                    context.GameGenres.Add(genreItem);
                     context.SaveChanges();
                 }
 
-                return Redirect(string.Format("/Menu/ViewMenu/" + addGameItemViewModel.GenreID));
+                return Redirect(string.Format("/Genre/ViewGenre/" + addGenreItemViewModel.GenreID));
 
             }
-            return View(addGameItemViewModel);
+            return View(addGenreItemViewModel);
         }
 
     }

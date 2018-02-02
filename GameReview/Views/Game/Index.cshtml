@@ -1,13 +1,13 @@
 ﻿@model IList<GameReview.Models.Game>
 
-<h1>@ViewBag.Genre</h1>
+<h1>@ViewBag.Type</h1>
 
 <table class="table">
 
     <tr>
         <th>Title</th>
         <th>Description</th>
-        <th>Genre</th>
+        <th>Type</th>
     </tr>
 
     @foreach (var game in Model)
@@ -15,7 +15,7 @@
         <tr>
             <td>@game.Title</td>
             <td>@game.Description</td>
-            <td>@game.Type</td>
+            <td>@game.Type.Name</td>
         </tr>
     }
 </table>

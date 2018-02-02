@@ -1,14 +1,15 @@
 ﻿@model IList<GameReview.Models.GameType>
 
-    <h2>Genres</h2>
+    <h2>Types of Games</h2>
 
 @{ 
+    
+    <p><a asp-controller="Type" asp-action="Add">Add Type</a></p>
     <ul>
-        <p><a asp-controller="Type" asp-action="Add">Add Type</a></p>
         @foreach(var type in Model)
         {
             <li>
-                <a asp-controller="Game" asp-action="Type" asp-route-id="@type.ID">@type.Type</a>
+                <a asp-controller="Game" asp-action="Type" asp-route-id="@type.ID">@type.Name</a>
             </li>
 
         }

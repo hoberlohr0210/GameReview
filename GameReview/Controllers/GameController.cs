@@ -11,7 +11,7 @@ namespace GameReview.Controllers
 {
     public class GameController : Controller
     {
-        private GameDbContext context;
+        private readonly GameDbContext context;
 
         public GameController(GameDbContext dbContext)
         {
@@ -29,8 +29,7 @@ namespace GameReview.Controllers
 
         public IActionResult Add()
         {
-            //passes collection of all description objects to the constructor
-            //generates a select list hopefully
+           
             AddGameViewModel addGameViewModel = new AddGameViewModel(context.Types.ToList());
             return View(addGameViewModel);
         }
@@ -64,6 +63,7 @@ namespace GameReview.Controllers
             return View();
 
         }
+
         [HttpPost]
         public IActionResult Remove(int[] gameIds)
         {
@@ -90,7 +90,7 @@ namespace GameReview.Controllers
                 .Include(ty => ty.Games)
                 .Single(ty => ty.ID == id);
 
-            ViewBag.title = "Games in genre: " + theType.Type;
+            ViewBag.title = "Games in type: " + theType.Name;
             //passes the list into the VIew
             //wouldn't have been populated if not included above
             //Games is a property we have already defined
